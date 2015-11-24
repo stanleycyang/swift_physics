@@ -47,6 +47,11 @@ class ViewController: UIViewController {
         collision = UICollisionBehavior(items: [square])
         // Add an invisible boundary that has the same frame as the barrier view. The boundary is visible to the dynamics engine but not the user
         collision.addBoundaryWithIdentifier("barrier", forPath: UIBezierPath(rect: barrier.frame))
+        
+        // action property where a block can be executed with every step of the animation
+        collision.action = {
+            print("\(NSStringFromCGAffineTransform(square.transform)) \(NSStringFromCGPoint(square.center))")
+        }
         collision.translatesReferenceBoundsIntoBoundary = true
         animator.addBehavior(collision)
         
