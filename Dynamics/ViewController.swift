@@ -8,13 +8,14 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UICollisionBehaviorDelegate {
 
     var animator: UIDynamicAnimator!
     var gravity: UIGravityBehavior!
     var collision: UICollisionBehavior!
     override func viewDidLoad() {
         super.viewDidLoad()
+
         // Do any additional setup after loading the view, typically from a nib.
         
         /*
@@ -45,6 +46,19 @@ class ViewController: UIViewController {
          */
         
         collision = UICollisionBehavior(items: [square])
+        
+        // Set the view controller as the delegate after the collision object
+        collision.collisionDelegate = self
+        
+        func collisionBehavior(behavior: UICollisionBehavior!, beganContactFormItem item: UIDynamicItem!, withBoundaryIdentifier identifier: NSCopying!, atPoint p: CGPoint) {
+            print("Boundary contact occurred = \(identifier)")
+            let collidingView = item as! UIView
+            collidingView.backgroundColor = UIColor.yellowColor()
+            UIView.animateWithDuration(0.3) {
+                collidingView.backgroundColor = UIColor.grayColor()
+            }
+        }
+        
         // Add an invisible boundary that has the same frame as the barrier view. The boundary is visible to the dynamics engine but not the user
         collision.addBoundaryWithIdentifier("barrier", forPath: UIBezierPath(rect: barrier.frame))
         
