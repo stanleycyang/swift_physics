@@ -12,6 +12,7 @@ class ViewController: UIViewController {
 
     var animator: UIDynamicAnimator!
     var gravity: UIGravityBehavior!
+    var collision: UICollisionBehavior!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -27,9 +28,17 @@ class ViewController: UIViewController {
         /*
          * add gravity
          */
-        animator = UIDynamicAnimator(referenceView: view)
-        gravity = UIGravityBehavior(items: [square])
+        animator = UIDynamicAnimator(referenceView: view) // UIKit physics engine. This class keeps track of the various behaviours that you add to the engine, such as gravity and provides overall context.
+        gravity = UIGravityBehavior(items: [square]) // models the behavior of gravity and exerts forces on one or more items, allowing you to model interactions
         animator.addBehavior(gravity)
+        
+        /* 
+         * Add collision
+         */
+        
+        collision = UICollisionBehavior(items: [square])
+        collision.translatesReferenceBoundsIntoBoundary = true
+        animator.addBehavior(collision)
         
     }
 
