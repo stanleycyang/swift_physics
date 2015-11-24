@@ -44,7 +44,9 @@ class ViewController: UIViewController {
          * Add collision
          */
         
-        collision = UICollisionBehavior(items: [square, barrier])
+        collision = UICollisionBehavior(items: [square])
+        // Add an invisible boundary that has the same frame as the barrier view. The boundary is visible to the dynamics engine but not the user
+        collision.addBoundaryWithIdentifier("barrier", forPath: UIBezierPath(rect: barrier.frame))
         collision.translatesReferenceBoundsIntoBoundary = true
         animator.addBehavior(collision)
         
