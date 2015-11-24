@@ -44,7 +44,7 @@ class ViewController: UIViewController {
          * Add collision
          */
         
-        collision = UICollisionBehavior(items: [square])
+        collision = UICollisionBehavior(items: [square, barrier])
         collision.translatesReferenceBoundsIntoBoundary = true
         animator.addBehavior(collision)
         
