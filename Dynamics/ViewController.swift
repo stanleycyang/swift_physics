@@ -25,6 +25,14 @@ class ViewController: UIViewController {
         square.backgroundColor = UIColor.grayColor()
         view.addSubview(square)
         
+        /* 
+         * Add an immovable barrier
+         */
+        
+        let barrier = UIView(frame: CGRect(x: 0, y: 300, width: 130, height: 20))
+        barrier.backgroundColor = UIColor.blueColor()
+        view.addSubview(barrier)
+        
         /*
          * add gravity
          */
